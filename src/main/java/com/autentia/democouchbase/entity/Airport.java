@@ -9,47 +9,61 @@ import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 import org.springframework.data.couchbase.core.mapping.id.IdPrefix;
 import org.springframework.data.couchbase.core.mapping.id.IdSuffix;
 
-@TypeAlias("airport")
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 @Document
 public class Airport {
 
-    @Id
+    public static final String TYPE = "airport";
+
+    @Id @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "_")
     private String documentId;
 
-    @Field
-    private String airportname;
+    @Min(5)
+    @Field("airportname")
+    private String airportName;
 
+    @Min(5)
     @Field
     private String city;
 
+    @Min(5)
     @Field
     private String country;
 
+    @Min(4)
     @Field
     private String icao;
 
-    @Field
+    @NotNull
+    @Field @IdSuffix(order=0)
     private Long id;
 
+    @Min(5)
     @Field
     private String tz;
 
-    public Airport(String documentId, String airportname, String city, String country, String icao, Long id, String tz) {
-        this.documentId = documentId;
-        this.airportname = airportname;
+    @Min(5)
+    @Field @IdPrefix(order=0)
+    private String type;
+
+    public Airport(String airportName, String city, String country, String icao, Long id, String tz, String type) {
+        this.airportName = airportName;
         this.city = city;
         this.country = country;
         this.icao = icao;
         this.id = id;
         this.tz = tz;
+        this.type = type;
     }
 
     public String getDocumentId() {
         return documentId;
     }
 
-    public String getAirportname() {
-        return airportname;
+    public String getAirportName() {
+        return airportName;
     }
 
     public String getCity() {
@@ -72,11 +86,15 @@ public class Airport {
         return tz;
     }
 
+    public String getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Airport{");
         sb.append("documentId='").append(documentId).append('\'');
-        sb.append(", airportname='").append(airportname).append('\'');
+        sb.append(", airportName='").append(airportName).append('\'');
         sb.append(", city='").append(city).append('\'');
         sb.append(", country='").append(country).append('\'');
         sb.append(", icao='").append(icao).append('\'');

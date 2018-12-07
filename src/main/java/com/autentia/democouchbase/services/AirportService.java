@@ -1,5 +1,6 @@
 package com.autentia.democouchbase.services;
 
+import com.autentia.democouchbase.command.CreateAirportCommand;
 import com.autentia.democouchbase.dao.AirportRepository;
 import com.autentia.democouchbase.entity.Airport;
 import org.springframework.data.domain.Page;
@@ -33,5 +34,22 @@ public class AirportService {
         Page<Airport> page = airportRepository.list(country, pageRequest);
 
         return page.getContent();
+    }
+
+    public Airport create(CreateAirportCommand command) {
+
+        String airportName = command.getAirportName();
+        String city = command.getCity();
+        String country = command.getCountry();
+        String icao = command.getIcao();
+        Long id = command.getId();
+        String type = Airport.TYPE;
+        String tz = command.getTz();
+
+        Airport airport = new Airport(airportName, city, country, icao, id, tz, type);
+
+        airportRepository.save(airport);
+
+        return airport;
     }
 }
