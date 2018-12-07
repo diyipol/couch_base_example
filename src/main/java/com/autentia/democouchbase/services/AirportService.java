@@ -31,7 +31,7 @@ public class AirportService {
 
         PageRequest pageRequest = PageRequest.of(pageNumber, pageSize);
 
-        Page<Airport> page = airportRepository.list(country, pageRequest);
+        Page<Airport> page = airportRepository.findByCountry(country, pageRequest);
 
         return page.getContent();
     }

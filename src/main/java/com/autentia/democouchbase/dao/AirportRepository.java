@@ -12,4 +12,6 @@ public interface AirportRepository extends PagingAndSortingRepository<Airport, S
 
     @Query("#{#n1ql.selectEntity} WHERE #{#n1ql.filter} AND country = $country")
     Page<Airport> list(String country, Pageable pageable);
+
+    Page<Airport> findByCountry(String country, Pageable pageable);
 }
