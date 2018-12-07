@@ -20,12 +20,12 @@ public class AirportController {
     }
 
     @GetMapping("/airport")
-    public Iterable<Airport> list() {
+    public List<Airport> list() {
         return airportService.list();
     }
 
     @GetMapping("/airport/{country}")
-    public Iterable<Airport> list(@PathVariable String country, @RequestParam int pageNumber, @RequestParam int pageSize) {
+    public List<Airport> list(@PathVariable String country, @RequestParam int pageNumber, @RequestParam int pageSize) {
         return airportService.list(country, pageNumber, pageSize);
     }
 
