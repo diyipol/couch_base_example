@@ -1,12 +1,10 @@
-package com.autentia.democouchbase.dao;
+package com.autentia.democouchbase.airports.dao;
 
-import com.autentia.democouchbase.entity.Airport;
+import com.autentia.democouchbase.airports.entity.Airport;
 import org.springframework.data.couchbase.core.query.Query;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
-
-import java.util.List;
 
 public interface AirportRepository extends PagingAndSortingRepository<Airport, String> {
 

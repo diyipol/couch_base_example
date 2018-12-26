@@ -1,4 +1,4 @@
-package com.autentia.democouchbase.command;
+package com.autentia.democouchbase.airports.command;
 
 public class CreateAirportCommand {
 

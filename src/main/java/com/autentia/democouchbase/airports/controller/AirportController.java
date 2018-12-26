@@ -1,14 +1,11 @@
-package com.autentia.democouchbase.controller;
+package com.autentia.democouchbase.airports.controller;
 
-import com.autentia.democouchbase.command.CreateAirportCommand;
-import com.autentia.democouchbase.dao.AirportRepository;
-import com.autentia.democouchbase.entity.Airport;
-import com.autentia.democouchbase.services.AirportService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.autentia.democouchbase.airports.command.CreateAirportCommand;
+import com.autentia.democouchbase.airports.entity.Airport;
+import com.autentia.democouchbase.airports.services.AirportService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class AirportController {

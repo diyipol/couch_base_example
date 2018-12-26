@@ -1,14 +1,13 @@
-package com.autentia.democouchbase.services;
+package com.autentia.democouchbase.airports.services;
 
-import com.autentia.democouchbase.command.CreateAirportCommand;
-import com.autentia.democouchbase.dao.AirportRepository;
-import com.autentia.democouchbase.entity.Airport;
+import com.autentia.democouchbase.airports.command.CreateAirportCommand;
+import com.autentia.democouchbase.airports.dao.AirportRepository;
+import com.autentia.democouchbase.airports.entity.Airport;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service

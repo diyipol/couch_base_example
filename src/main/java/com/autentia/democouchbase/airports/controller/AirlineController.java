@@ -1,7 +1,7 @@
-package com.autentia.democouchbase.controller;
+package com.autentia.democouchbase.airports.controller;
 
-import com.autentia.democouchbase.dao.AirlineRepository;
-import com.autentia.democouchbase.entity.Airline;
+import com.autentia.democouchbase.airports.dao.AirlineRepository;
+import com.autentia.democouchbase.airports.entity.Airline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
