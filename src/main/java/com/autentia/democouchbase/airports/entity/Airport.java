@@ -8,8 +8,8 @@ import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 import org.springframework.data.couchbase.core.mapping.id.IdPrefix;
 import org.springframework.data.couchbase.core.mapping.id.IdSuffix;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Document
 public class Airport {
@@ -19,19 +19,23 @@ public class Airport {
     @Id @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "_")
     private String documentId;
 
-    @Min(5)
+    @Size(min = 5)
+    @NotNull
     @Field("airportname")
     private String airportName;
 
-    @Min(5)
+    @Size(min = 5)
+    @NotNull
     @Field
     private String city;
 
-    @Min(5)
+    @Size(min = 5)
+    @NotNull
     @Field
     private String country;
 
-    @Min(4)
+    @Size(min = 4)
+    @NotNull
     @Field
     private String icao;
 
@@ -39,11 +43,13 @@ public class Airport {
     @Field @IdSuffix(order=0)
     private Long id;
 
-    @Min(5)
+    @Size(min = 5)
+    @NotNull
     @Field
     private String tz;
 
-    @Min(5)
+    @Size(min = 5)
+    @NotNull
     @Field @IdPrefix(order=0)
     private String type;
 
