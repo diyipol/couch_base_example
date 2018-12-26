@@ -2,7 +2,12 @@ package com.autentia.democouchbase.beers.entity;
 
 import com.couchbase.client.java.repository.annotation.Field;
 import com.couchbase.client.java.repository.annotation.Id;
+import org.springframework.data.annotation.*;
 import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
+import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
+import org.springframework.data.couchbase.core.mapping.id.IdPrefix;
+import org.springframework.data.couchbase.core.mapping.id.IdSuffix;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,14 +15,15 @@ import java.time.LocalDateTime;
 @Document
 public class Beer {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "-")
     private String id;
 
     @Field
     private BigDecimal abv;
 
-    @Field
-    private String brewery_id;
+    @IdPrefix(order = 0)
+    @Field("brewery_id")
+    private String breweryId;
 
     @Field
     private String category;
@@ -28,6 +34,7 @@ public class Beer {
     @Field
     private Long ibu;
 
+    @IdSuffix(order = 0)
     @Field
     private String name;
 
@@ -40,13 +47,25 @@ public class Beer {
     @Field
     private Long upc;
 
-    @Field
+    @CreatedDate
+    private LocalDateTime created;
+
+    @CreatedBy
+    private String createdBy;
+
+    @LastModifiedDate
     private LocalDateTime updated;
 
-    public Beer(BigDecimal abv, String brewery_id, String category, String description, Long ibu, String name, Long srm,
-                String style, Long upc, LocalDateTime updated) {
+    @LastModifiedBy
+    private String lastModifiedBy;
+
+    @Version
+    private Long version;
+
+    public Beer(BigDecimal abv, String breweryId, String category, String description, Long ibu, String name, Long srm,
+                String style, Long upc) {
         this.abv = abv;
-        this.brewery_id = brewery_id;
+        this.breweryId = breweryId;
         this.category = category;
         this.description = description;
         this.ibu = ibu;
@@ -54,15 +73,18 @@ public class Beer {
         this.srm = srm;
         this.style = style;
         this.upc = upc;
-        this.updated = updated;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public BigDecimal getAbv() {
         return abv;
     }
 
-    public String getBrewery_id() {
-        return brewery_id;
+    public String getBreweryId() {
+        return breweryId;
     }
 
     public String getCategory() {
@@ -93,15 +115,32 @@ public class Beer {
         return upc;
     }
 
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
     public LocalDateTime getUpdated() {
         return updated;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public Long getVersion() {
+        return version;
     }
 
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Beer{");
-        sb.append("abv=").append(abv);
-        sb.append(", brewery_id='").append(brewery_id).append('\'');
+        sb.append("id='").append(id).append('\'');
+        sb.append(", abv=").append(abv);
+        sb.append(", breweryId='").append(breweryId).append('\'');
         sb.append(", category='").append(category).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", ibu=").append(ibu);
@@ -110,6 +149,8 @@ public class Beer {
         sb.append(", style='").append(style).append('\'');
         sb.append(", upc=").append(upc);
         sb.append(", updated=").append(updated);
+        sb.append(", lastModifiedBy='").append(lastModifiedBy).append('\'');
+        sb.append(", version=").append(version);
         sb.append('}');
         return sb.toString();
     }

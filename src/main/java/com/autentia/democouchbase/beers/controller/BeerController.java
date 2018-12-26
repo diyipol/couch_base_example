@@ -1,10 +1,9 @@
 package com.autentia.democouchbase.beers.controller;
 
+import com.autentia.democouchbase.beers.command.CreateBeerCommand;
 import com.autentia.democouchbase.beers.entity.Beer;
 import com.autentia.democouchbase.beers.services.BeerService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +19,11 @@ public class BeerController {
     @GetMapping("/beer")
     public List<Beer> list(@RequestParam int pageNumber, @RequestParam int pageSize) {
         return beerService.list(pageNumber, pageSize);
+    }
+
+    @PostMapping("/beer")
+    public Beer create(@RequestBody CreateBeerCommand command) {
+        return beerService.create(command);
     }
 
 }
