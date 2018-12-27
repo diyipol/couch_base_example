@@ -4,46 +4,61 @@ import com.couchbase.client.java.repository.annotation.Field;
 import com.couchbase.client.java.repository.annotation.Id;
 import org.springframework.data.annotation.*;
 import org.springframework.data.couchbase.core.mapping.Document;
-import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
-import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
-import org.springframework.data.couchbase.core.mapping.id.IdPrefix;
-import org.springframework.data.couchbase.core.mapping.id.IdSuffix;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Document
 public class Beer {
 
-    @Id @GeneratedValue(strategy = GenerationStrategy.USE_ATTRIBUTES, delimiter = "-")
+    @Id
     private String id;
 
+    @NotNull
+    @Min(0)
     @Field
     private BigDecimal abv;
 
-    @IdPrefix(order = 0)
+    @NotNull
+    @Size(min = 3)
     @Field("brewery_id")
     private String breweryId;
 
+    @NotNull
+    @Size(min = 5)
     @Field
     private String category;
 
+    @NotNull
+    @Size(min = 5)
     @Field
     private String description;
 
+    @NotNull
+    @Min(0)
     @Field
     private Long ibu;
 
-    @IdSuffix(order = 0)
+    @NotNull
+    @Size(min = 5)
     @Field
     private String name;
 
+    @NotNull
+    @Min(0)
     @Field
     private Long srm;
 
+    @NotNull
+    @Size(min = 5)
     @Field
     private String style;
 
+    @NotNull
+    @Min(0)
     @Field
     private Long upc;
 
@@ -62,8 +77,9 @@ public class Beer {
     @Version
     private Long version;
 
-    public Beer(BigDecimal abv, String breweryId, String category, String description, Long ibu, String name, Long srm,
+    public Beer(String id, BigDecimal abv, String breweryId, String category, String description, Long ibu, String name, Long srm,
                 String style, Long upc) {
+        this.id = id;
         this.abv = abv;
         this.breweryId = breweryId;
         this.category = category;
