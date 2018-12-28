@@ -77,9 +77,8 @@ public class Beer {
     @Version
     private Long version;
 
-    public Beer(String id, BigDecimal abv, String breweryId, String category, String description, Long ibu, String name, Long srm,
+    public Beer(BigDecimal abv, String breweryId, String category, String description, Long ibu, String name, Long srm,
                 String style, Long upc) {
-        this.id = id;
         this.abv = abv;
         this.breweryId = breweryId;
         this.category = category;
@@ -93,6 +92,10 @@ public class Beer {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public BigDecimal getAbv() {
